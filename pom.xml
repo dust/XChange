@@ -49,6 +49,7 @@
         <module>xchange-bitget</module>
         <module>xchange-bithumb</module>
         <module>xchange-bitmex</module>
+        <module>xchange-bitrue</module>
         <module>xchange-bitso</module>
         <module>xchange-bitstamp</module>
         <module>xchange-bittrex</module>
