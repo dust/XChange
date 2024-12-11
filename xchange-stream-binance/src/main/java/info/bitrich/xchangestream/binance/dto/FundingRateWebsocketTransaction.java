@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 import java.util.Date;
 import lombok.Getter;
 import org.knowm.xchange.binance.BinanceAdapters;
+import org.knowm.xchange.binance.dto.marketdata.BinanceFundingRate;
 import org.knowm.xchange.dto.marketdata.FundingRate;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -37,12 +38,13 @@ public class FundingRateWebsocketTransaction extends ProductBinanceWebSocketTran
   }
 
   public FundingRate toFundingRate() {
-    return new FundingRate.Builder()
-        .fundingRate8h(fundingRate)
-        .fundingRate1h(
-            fundingRate.divide(BigDecimal.valueOf(8), fundingRate.scale(), RoundingMode.HALF_EVEN))
-        .fundingRateDate(nextFundingTime)
-        .instrument(BinanceAdapters.adaptSymbol(symbol, true))
-        .build();
+//    return new FundingRate.Builder()
+//        .fundingRate8h(fundingRate)
+//        .fundingRate1h(
+//            fundingRate.divide(BigDecimal.valueOf(8), fundingRate.scale(), RoundingMode.HALF_EVEN))
+//        .fundingRateDate(nextFundingTime)
+//        .instrument(BinanceAdapters.adaptSymbol(symbol, true))
+//        .build();
+    return new BinanceFundingRate(symbol, markPrice, indexPrice, estimatedSettlePrice, fundingRate, nextFundingTime, BigDecimal.ZERO, new Date());
   }
 }
