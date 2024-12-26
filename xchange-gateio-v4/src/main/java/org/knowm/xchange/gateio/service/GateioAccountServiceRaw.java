@@ -27,7 +27,7 @@ import org.knowm.xchange.service.trade.params.TradeHistoryParamsTimeSpan;
 public class GateioAccountServiceRaw extends GateioBaseService {
 
   public GateioAccountServiceRaw(GateioExchange exchange) {
-    super(exchange);
+    super(exchange, exchange.getDefaultExchangeSpecification());
   }
 
   public GateioDepositAddress getDepositAddress(Currency currency) throws IOException {

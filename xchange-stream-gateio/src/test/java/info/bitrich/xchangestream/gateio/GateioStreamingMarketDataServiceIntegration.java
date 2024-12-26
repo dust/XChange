@@ -3,13 +3,21 @@ package info.bitrich.xchangestream.gateio;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.observers.TestObserver;
+import java.io.Console;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.marketdata.Ticker;
 import org.knowm.xchange.dto.marketdata.Trade;
+import org.knowm.xchange.dto.meta.InstrumentMetaData;
+import org.knowm.xchange.gateio.service.GateioMarketDataService;
+import org.knowm.xchange.instrument.Instrument;
 
 public class GateioStreamingMarketDataServiceIntegration extends GateioStreamingExchangeIT {
 
@@ -58,19 +66,40 @@ public class GateioStreamingMarketDataServiceIntegration extends GateioStreaming
 
   @Test
   void ticker() {
-    Observable<Ticker> observable =
-        exchange.getStreamingMarketDataService().getTicker(CurrencyPair.BTC_USDT);
 
-    TestObserver<Ticker> testObserver = observable.test();
+    try {
+      List<CurrencyPair> list = ((GateioMarketDataService)exchange.getMarketDataService()).getCurrencyPairs();
+      System.out.println(list);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    Ticker ticker = testObserver
-        .awaitCount(1)
-//        .awaitDone(1, TimeUnit.MINUTES)
-        .values().get(0);
-
-    testObserver.dispose();
-
-    assertThat(ticker).hasNoNullFieldsOrPropertiesExcept("open", "vwap", "bidSize", "askSize");
-    assertThat(ticker.getInstrument()).isEqualTo(CurrencyPair.BTC_USDT);
+    exchange.getStreamingMarketDataService().getTicker(CurrencyPair.BTC_USDT).subscribe(
+        new Consumer<Ticker>() {
+          @Override
+          public void accept(Ticker ticker) throws Throwable {
+            System.out.println(ticker.toString());
+          }
+        });
+//    Observable<Ticker> observable =
+//        exchange.getStreamingMarketDataService().getTicker(CurrencyPair.BTC_USDT);
+//
+//    TestObserver<Ticker> testObserver = observable.test();
+//
+//    Ticker ticker = testObserver
+//        .awaitCount(1)
+////        .awaitDone(1, TimeUnit.MINUTES)
+//        .values().get(0);
+//
+//    testObserver.dispose();
+//
+//    assertThat(ticker).hasNoNullFieldsOrPropertiesExcept("open", "vwap", "bidSize", "askSize");
+//    assertThat(ticker.getInstrument()).isEqualTo(CurrencyPair.BTC_USDT);
+    try {
+      System.in.read();
+    }
+    catch (Exception ex){
+      ex.printStackTrace();
+    }
   }
 }

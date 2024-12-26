@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
@@ -31,8 +32,8 @@ import org.knowm.xchange.service.marketdata.params.Params;
 public class GateioMarketDataService extends GateioMarketDataServiceRaw
     implements MarketDataService {
 
-  public GateioMarketDataService(GateioExchange exchange) {
-    super(exchange);
+  public GateioMarketDataService(GateioExchange exchange, ExchangeSpecification spec) {
+    super(exchange, spec);
   }
 
   @Override

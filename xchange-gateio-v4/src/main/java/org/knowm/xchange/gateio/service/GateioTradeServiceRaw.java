@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.Validate;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.Order.OrderStatus;
 import org.knowm.xchange.gateio.GateioAdapters;
@@ -24,8 +25,8 @@ import org.knowm.xchange.service.trade.params.TradeHistoryParamsTimeSpan;
 
 public class GateioTradeServiceRaw extends GateioBaseService {
 
-  public GateioTradeServiceRaw(GateioExchange exchange) {
-    super(exchange);
+  public GateioTradeServiceRaw(GateioExchange exchange, ExchangeSpecification spec) {
+    super(exchange, spec);
   }
 
   public List<GateioOrder> listOrders(Instrument instrument, OrderStatus orderStatus)

@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.apache.commons.lang3.Validate;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.dto.Order;
 import org.knowm.xchange.dto.Order.OrderStatus;
 import org.knowm.xchange.dto.marketdata.Trades.TradeSortType;
@@ -29,8 +30,8 @@ import org.knowm.xchange.service.trade.params.orders.OrderQueryParams;
 
 public class GateioTradeService extends GateioTradeServiceRaw implements TradeService {
 
-  public GateioTradeService(GateioExchange exchange) {
-    super(exchange);
+  public GateioTradeService(GateioExchange exchange, ExchangeSpecification spec) {
+    super(exchange, spec);
   }
 
   @Override

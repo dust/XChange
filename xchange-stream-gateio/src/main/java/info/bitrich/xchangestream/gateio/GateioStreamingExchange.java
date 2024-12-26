@@ -9,6 +9,9 @@ import info.bitrich.xchangestream.gateio.config.Config;
 import io.reactivex.rxjava3.core.Completable;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.gateio.GateioExchange;
+import org.knowm.xchange.gateio.service.GateioAccountService;
+import org.knowm.xchange.gateio.service.GateioMarketDataService;
+import org.knowm.xchange.gateio.service.GateioTradeService;
 
 public class GateioStreamingExchange extends GateioExchange implements StreamingExchange {
 
@@ -75,5 +78,13 @@ public class GateioStreamingExchange extends GateioExchange implements Streaming
     specification.setShouldLoadRemoteMetaData(false);
     specification.setSslUri(Config.V4_URL);
     return specification;
+  }
+
+  @Override
+  protected void initServices() {
+    ExchangeSpecification restSpec = super.getDefaultExchangeSpecification();
+    marketDataService = new GateioMarketDataService(this, restSpec);
+    accountService = new GateioAccountService(this);
+    tradeService = new GateioTradeService(this, restSpec);
   }
 }

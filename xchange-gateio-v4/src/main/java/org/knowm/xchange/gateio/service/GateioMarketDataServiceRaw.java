@@ -2,6 +2,7 @@ package org.knowm.xchange.gateio.service;
 
 import java.io.IOException;
 import java.util.List;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.gateio.GateioAdapters;
 import org.knowm.xchange.gateio.GateioExchange;
@@ -15,8 +16,8 @@ import org.knowm.xchange.instrument.Instrument;
 
 public class GateioMarketDataServiceRaw extends GateioBaseService {
 
-  public GateioMarketDataServiceRaw(GateioExchange exchange) {
-    super(exchange);
+  public GateioMarketDataServiceRaw(GateioExchange exchange, ExchangeSpecification spec) {
+    super(exchange, spec);
   }
 
   public GateioServerTime getGateioServerTime() throws IOException {

@@ -21,9 +21,9 @@ public class GateioExchange extends BaseExchange {
 
   @Override
   protected void initServices() {
-    marketDataService = new GateioMarketDataService(this);
+    marketDataService = new GateioMarketDataService(this, getDefaultExchangeSpecification());
     accountService = new GateioAccountService(this);
-    tradeService = new GateioTradeService(this);
+    tradeService = new GateioTradeService(this, getDefaultExchangeSpecification());
   }
 
   @Override

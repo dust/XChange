@@ -1,6 +1,7 @@
 package org.knowm.xchange.gateio.service;
 
 import lombok.SneakyThrows;
+import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.client.ExchangeRestProxyBuilder;
 import org.knowm.xchange.gateio.Gateio;
 import org.knowm.xchange.gateio.GateioExchange;
@@ -19,11 +20,11 @@ public class GateioBaseService extends BaseExchangeService<GateioExchange> imple
   protected final ParamsDigest gateioV4ParamsDigest;
 
   @SneakyThrows
-  public GateioBaseService(GateioExchange exchange) {
+  public GateioBaseService(GateioExchange exchange, ExchangeSpecification spec) {
     super(exchange);
 
     gateio =
-        ExchangeRestProxyBuilder.forInterface(Gateio.class, exchange.getExchangeSpecification())
+        ExchangeRestProxyBuilder.forInterface(Gateio.class, spec)
             .clientConfigCustomizer(
                 clientConfig ->
                     clientConfig.setJacksonObjectMapperFactory(
