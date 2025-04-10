@@ -195,14 +195,14 @@ public class BybitAdapters {
         return new OptionsContract.Builder()
             .currencyPair(
                 new CurrencyPair(instrumentInfo.getBaseCoin(), instrumentInfo.getQuoteCoin()))
-            .expireDate(OPTION_DATE_FORMAT.get().parse(expireDateString))
+//            .expireDate(OPTION_DATE_FORMAT.get().parse(expireDateString))
             .strike(strike)
             .type(
                 optionInstrumentInfo.getOptionsType().equals(OptionType.CALL)
                     ? OptionsContract.OptionType.CALL
                     : OptionsContract.OptionType.PUT)
             .build();
-      } catch (ParseException e) {
+      } catch (Throwable e) {
         throw new ExchangeException("Unable to convert instrument info.", e);
       }
     }

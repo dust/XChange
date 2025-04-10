@@ -31,13 +31,13 @@ public class BybitStreamExample {
   private static final Logger log = LoggerFactory.getLogger(BybitStreamExample.class);
 
   public static void main(String[] args) {
-    try {
-      //      spot();
-      auth();
-    } catch (IOException | InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-    //    futures();
+//    try {
+//            spot();
+////      auth();
+//    } catch (IOException | InterruptedException e) {
+//      throw new RuntimeException(e);
+//    }
+        futures();
 
   }
 
@@ -178,7 +178,7 @@ public class BybitStreamExample {
         SPECIFIC_PARAM_ACCOUNT_TYPE, BybitAccountType.UNIFIED);
     exchangeSpecification.setExchangeSpecificParametersItem(
         BybitStreamingExchange.EXCHANGE_TYPE, BybitCategory.LINEAR);
-    exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, true);
+    exchangeSpecification.setExchangeSpecificParametersItem(USE_SANDBOX, false);
     StreamingExchange exchange =
         StreamingExchangeFactory.INSTANCE.createExchange(exchangeSpecification);
     exchange.connect().blockingAwait();
