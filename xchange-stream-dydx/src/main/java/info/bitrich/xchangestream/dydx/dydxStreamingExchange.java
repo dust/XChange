@@ -5,8 +5,13 @@ import info.bitrich.xchangestream.core.StreamingExchange;
 import info.bitrich.xchangestream.core.StreamingMarketDataService;
 import info.bitrich.xchangestream.dydx.service.v1.dydxStreamingMarketDataService;
 import io.reactivex.rxjava3.core.Completable;
+import java.util.List;
+import org.knowm.xchange.Exchange;
+import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
+import org.knowm.xchange.dydx.DyDxExchangeV4;
 import org.knowm.xchange.dydx.dydxExchange;
+import org.knowm.xchange.instrument.Instrument;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +30,16 @@ public class dydxStreamingExchange extends dydxExchange implements StreamingExch
 
   private dydxStreamingService streamingService;
   private StreamingMarketDataService streamingMarketDataService;
+  private final DyDxExchangeV4 exchangeV4;
 
-  public dydxStreamingExchange() {}
+  public dydxStreamingExchange() {
+    exchangeV4 = ExchangeFactory.INSTANCE.createExchange(DyDxExchangeV4.class);
+  }
+
+  @Override
+  public List<Instrument> getExchangeInstruments() {
+    return exchangeV4.getExchangeInstruments();
+  }
 
   @Override
   public Completable connect(ProductSubscription... args) {
